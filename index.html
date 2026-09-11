@@ -1,0 +1,874 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f172a">
+<title>Fees Manager — Sports Academy</title>
+<style>
+:root{--nav:#0f172a;--green:#10b981;--amber:#f59e0b;--red:#ef4444;--bg:#f5f7fb;--card:#fff;--text:#0f172a;--muted:#64748b;--line:#e2e8f0}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,select{font:inherit}button{cursor:pointer}.app{min-height:100vh}.sidebar{position:fixed;left:0;top:0;bottom:0;width:245px;background:var(--nav);color:#cbd5e1;padding:20px 14px;z-index:50;display:flex;flex-direction:column}.brand{display:flex;gap:10px;align-items:center;padding:5px 9px 28px;color:#fff}.logo{width:39px;height:39px;border-radius:11px;background:var(--green);color:#06251c;display:grid;place-items:center;font-weight:900}.brand span{display:block;font-size:11px;color:#94a3b8;margin-top:2px}.nav{border:0;background:transparent;color:#94a3b8;padding:12px;border-radius:10px;text-align:left;display:flex;gap:11px;align-items:center;margin:2px 0}.nav.active,.nav:hover{background:#1e293b;color:#fff}.nav.active{color:#fff}.user{margin-top:auto;border-top:1px solid #1e293b;padding:16px 8px;display:flex;gap:10px;align-items:center}.avatar{width:37px;height:37px;border-radius:50%;background:#dbeafe;color:#1d4ed8;display:grid;place-items:center;font-weight:800;flex:none}.user .avatar{background:#334155;color:#fff}.user small{color:#94a3b8;display:block}
+main{margin-left:245px}header{height:70px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:13px;padding:0 28px;position:sticky;top:0;z-index:20}.search{height:41px;display:flex;align-items:center;gap:8px;background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:0 12px;max-width:520px;flex:1;color:#64748b}.search input{border:0;outline:0;background:transparent;width:100%}.hamb{display:none;border:0;background:transparent;font-size:22px}.primary{background:var(--green);border:0;color:#fff;border-radius:9px;padding:10px 14px;font-weight:750;display:inline-flex;gap:7px;align-items:center}.content{padding:28px;max-width:1450px;margin:auto}.title{display:flex;justify-content:space-between;align-items:center;margin-bottom:21px}.title h1{font-size:25px;margin:0 0 5px}.title p{margin:0;color:var(--muted);font-size:13px}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.card,.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 5px 18px #0f172a08}.card{padding:17px}.icon{width:38px;height:38px;border-radius:10px;background:#e2e8f0;display:grid;place-items:center;margin-bottom:12px}.icon.green{background:#d1fae5;color:#047857}.icon.amber{background:#fef3c7;color:#b45309}.card label,.card small{display:block;color:var(--muted);font-size:12px}.card strong{font-size:23px;display:block;margin:4px 0}.quick{margin:18px 0;background:var(--nav);color:#fff;border-radius:14px;padding:13px;display:flex;align-items:center;gap:9px;flex-wrap:wrap}.quick b{margin-right:auto}.quick button{border:0;background:#1e293b;color:#e2e8f0;padding:9px 11px;border-radius:8px;font-size:12px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.panel{overflow:hidden}.ph{padding:17px 19px;border-bottom:1px solid #eef2f7;display:flex;justify-content:space-between;align-items:center}.ph h2{font-size:16px;margin:0 0 3px}.ph span{font-size:11px;color:var(--muted)}.chart{padding:22px;display:flex;align-items:center;justify-content:center;gap:38px}.donut{width:145px;height:145px;border-radius:50%;background:conic-gradient(var(--green) 0 50%,var(--amber) 50% 75%,var(--red) 75% 100%);position:relative}.donut:after{content:"";position:absolute;inset:26px;border-radius:50%;background:#fff}.legend{display:grid;gap:11px;font-size:12px}.legend div{display:grid;grid-template-columns:9px 70px 20px;gap:7px}.dot{width:8px;height:8px;border-radius:50%;margin-top:4px}.bars{height:205px;padding:20px;display:flex;align-items:end;gap:16px}.barc{flex:1;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:end;gap:7px;color:var(--muted);font-size:11px}.bar{width:min(42px,80%);background:var(--green);border-radius:6px 6px 2px 2px}.filters{padding:14px;display:flex;gap:9px;border-bottom:1px solid var(--line)}.filters .search{max-width:none}.filters select{height:39px;border:1px solid var(--line);border-radius:9px;background:#fff;padding:0 10px;color:#334155}.table{width:100%;border-collapse:collapse;min-width:720px}.table th,.table td{padding:13px 16px;border-bottom:1px solid #eef2f7;text-align:left;font-size:12px}.table th{color:var(--muted);background:#fafbfc}.player{display:flex;align-items:center;gap:9px;border:0;background:none;text-align:left}.player b,.player span,.td b,.td span{display:block}.player span,.td span{color:#94a3b8;font-size:10px;margin-top:3px}.badge{padding:5px 8px;border-radius:99px;font-weight:800;font-size:10px}.paid{background:#d1fae5;color:#047857}.partial{background:#fef3c7;color:#b45309}.unpaid{background:#fee2e2;color:#b91c1c}.actions{display:flex;gap:6px}.wa,.pay{border:0;border-radius:8px;padding:8px 10px;font-size:11px;font-weight:750}.wa{background:#dcfce7;color:#15803d}.pay{background:#ecfdf5;color:#047857}.del{background:#fee2e2;color:#b91c1c;border:0;border-radius:8px;padding:8px 10px;font-size:11px;font-weight:750}.empty{padding:40px;text-align:center;color:var(--muted);font-size:13px}.notice{background:#ecfdf5;border:1px solid #bbf7d0;color:#166534;border-radius:12px;padding:14px;margin-bottom:16px;font-size:13px}.settings{padding:20px;display:grid;gap:15px}.settings p{color:var(--muted);font-size:13px;line-height:1.6}.danger{border:0;background:#fee2e2;color:#b91c1c;border-radius:9px;padding:10px 13px;font-weight:750;width:max-content}.modalbg{position:fixed;inset:0;background:#0f172a77;display:grid;place-items:center;padding:15px;z-index:100}.modal{background:#fff;border-radius:16px;padding:21px;width:min(530px,100%);max-height:92vh;overflow:auto}.mh{display:flex;justify-content:space-between;align-items:start}.x{border:0;background:#f1f5f9;border-radius:8px;width:36px;height:36px}.form{display:grid;gap:13px;margin-top:15px}.form label{font-size:12px;font-weight:700}.form input,.form select{display:block;width:100%;height:42px;margin-top:5px;border:1px solid #cbd5e1;border-radius:9px;padding:0 10px;outline:0}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.wide{width:100%;margin-top:4px}.profile{margin-top:15px;background:#f8fafc;padding:14px;border-radius:11px;display:flex;gap:12px;align-items:center}.profile b,.profile span{display:block}.profile span{font-size:12px;color:var(--muted);margin-top:3px}.details{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:12px 0}.details div{background:#f8fafc;padding:11px;border-radius:9px}.details small,.details b{display:block}.details small{font-size:10px;color:var(--muted);margin-bottom:4px}.modalActions{display:flex;gap:8px}.modalActions>*{flex:1}.toast{position:fixed;right:18px;bottom:18px;background:#0f172a;color:#fff;padding:12px 15px;border-radius:10px;font-size:12px;z-index:150;box-shadow:0 10px 30px #0003}
+@media(max-width:900px){.sidebar{transform:translateX(-100%);transition:.2s;width:270px}.sidebar.open{transform:translateX(0)}.overlay{display:block!important;position:fixed;inset:0;background:#0f172a66;z-index:45}main{margin-left:0}.hamb{display:block}.cards{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}.content{padding:19px}}
+@media(max-width:600px){header{padding:0 13px;height:64px}.search{max-width:none}.header .primary{padding:9px}.primary{font-size:12px}.content{padding:14px}.title h1{font-size:21px}.cards{gap:9px}.card{padding:13px}.card strong{font-size:18px}.quick{align-items:stretch}.quick b{width:100%}.quick button{flex:1}.chart{gap:18px;padding:17px}.donut{width:118px;height:118px}.filters{flex-wrap:wrap}.filters .search{flex-basis:100%}.filters select{flex:1;min-width:0}.two{grid-template-columns:1fr}.modalActions{flex-direction:column}}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar" id="side">
+  <div class="brand"><div class="logo">FM</div><div><b>Fees Manager</b><span>Sports Academy</span></div></div>
+  <nav>
+    <button class="nav active" data-tab="Dashboard">▣ &nbsp; Dashboard</button>
+    <button class="nav" data-tab="Players">♙ &nbsp; Players</button>
+    <button class="nav" data-tab="Payments">₹ &nbsp; Payments</button>
+    <button class="nav" data-tab="Reminders">◉ &nbsp; Reminders</button>
+    <button class="nav" data-tab="Settings">⚙ &nbsp; Settings</button>
+  </nav>
+  <div class="user"><div class="avatar">A</div><div><b>Admin</b><small>Full access</small></div></div>
+</aside>
+
+<div class="overlay hidden" id="overlay"></div>
+
+<main>
+<header>
+<button class="hamb" id="hamb">☰</button>
+<div class="search">⌕ <input id="globalSearch" placeholder="Search players, phone or ID..."></div>
+<button class="primary" id="newBtn">＋ New Player</button>
+</header>
+
+<section class="content" id="content"></section>
+</main>
+
+<div id="modalRoot"></div>
+<div id="toastRoot"></div>
+</div>
+
+<script>
+const KEY="fees_manager_players_v1";
+
+const seed=[
+{id:"PLR-1001",name:"Aarav Patil",guardian:"Sanjay Patil",phone:"+919876543210",sport:"Football",batch:"Morning 6:00-8:00 AM",fee:1200,paid:1200,status:"Paid",joining:"2026-06-12",active:true},
+{id:"PLR-1002",name:"Riya Kulkarni",guardian:"Neha Kulkarni",phone:"+919812345678",sport:"Badminton",batch:"Evening 5:00-7:00 PM",fee:1000,paid:500,status:"Partial",joining:"2026-07-01",active:true},
+{id:"PLR-1003",name:"Ved Deshmukh",guardian:"Mahesh Deshmukh",phone:"+919700112233",sport:"Cricket",batch:"Evening 5:00-7:00 PM",fee:1500,paid:0,status:"Unpaid",joining:"2026-05-18",active:true},
+{id:"PLR-1004",name:"Anaya Shah",guardian:"Kiran Shah",phone:"+919900223344",sport:"Tennis",batch:"Morning 6:00-8:00 AM",fee:1800,paid:0,status:"Unpaid",joining:"2026-08-03",active:true}
+];
+
+let players=JSON.parse(localStorage.getItem(KEY)||"null")||seed;
+let tab="Dashboard", query="", sportFilter="All Sports", statusFilter="All Status";
+
+const money=n=>"₹"+Number(n||0).toLocaleString("en-IN");
+
+const month=new Intl.DateTimeFormat("en-IN",{
+month:"long",
+year:"numeric"
+}).format(new Date());
+
+function save(){
+localStorage.setItem(KEY,JSON.stringify(players))
+}
+
+function toast(t){
+const r=document.getElementById("toastRoot");
+r.innerHTML='<div class="toast">'+t+'</div>';
+setTimeout(()=>r.innerHTML="",2600)
+}
+
+function esc(s){
+return String(s??"").replace(/[&<>"']/g,m=>({
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+}[m]))
+}
+
+function initials(n){
+return (n||"?").trim()[0].toUpperCase()
+}
+
+function filtered(){
+return players.filter(p=>
+`${p.name} ${p.phone} ${p.id}`.toLowerCase().includes(query.toLowerCase()) &&
+(sportFilter==="All Sports"||p.sport===sportFilter) &&
+(statusFilter==="All Status"||p.status===statusFilter)
+)
+}
+
+function badge(s){
+return `<span class="badge ${s.toLowerCase()}">${s}</span>`
+}
+
+function wa(p){
+const pending=Math.max(0,p.fee-p.paid);
+
+const msg=
+`Hello ${p.guardian}, this is a fee reminder for ${p.name}. ${month} academy fee: ${money(p.fee)}. Amount pending: ${money(pending)}. Please make the payment by the due date. Thank you!`;
+
+window.open(
+`https://wa.me/${p.phone.replace(/\D/g,"")}?text=${encodeURIComponent(msg)}`,
+"_blank"
+);
+
+toast("WhatsApp reminder prepared for "+p.name);
+}
+
+function bulk(){
+players
+.filter(p=>p.active&&p.status!=="Paid")
+.forEach((p,i)=>setTimeout(()=>wa(p),i*700));
+
+toast("Bulk WhatsApp reminder queue started")
+}
+
+function pay(id){
+const p=players.find(x=>x.id===id);
+if(!p)return;
+
+const amount=prompt(
+`Enter amount paid for ${p.name}. Monthly fee: ${money(p.fee)}`,
+String(Math.max(0,p.fee-p.paid))
+);
+
+if(amount===null)return;
+
+let a=Number(amount);
+
+if(!isFinite(a)||a<0){
+toast("Enter a valid amount");
+return
+}
+
+a=Math.min(a,p.fee);
+
+p.paid=a;
+p.status=a>=p.fee?"Paid":a>0?"Partial":"Unpaid";
+p.paymentDate=new Date().toISOString().slice(0,10);
+p.mode="UPI";
+
+save();
+render();
+toast("Payment updated");
+}
+
+function reset(){
+if(!confirm(
+"Reset ALL ACTIVE players to UNPAID for this month? This demo resets their current paid amounts to ₹0."
+))return;
+
+players=players.map(p=>
+p.active
+?({...p,paid:0,status:"Unpaid",paymentDate:null})
+:p
+);
+
+save();
+render();
+toast("Monthly fees reset to UNPAID")
+}
+
+function deletePlayer(id){
+const p=players.find(x=>x.id===id);
+
+if(!p)return;
+
+if(!confirm(
+`Delete ${p.name} (${p.id}) permanently? This cannot be undone.`
+))return;
+
+players=players.filter(x=>x.id!==id);
+
+save();
+closeModal();
+render();
+
+toast(p.name+" deleted successfully");
+}
+
+function showPlayer(id){
+const p=players.find(x=>x.id===id);
+
+if(!p)return;
+
+document.getElementById("modalRoot").innerHTML=`
+<div class="modalbg" onclick="if(event.target===this)closeModal()">
+<div class="modal">
+
+<div class="mh">
+<div>
+<h2>${esc(p.name)}</h2>
+<small>${p.id} · ${esc(p.sport)}</small>
+</div>
+<button class="x" onclick="closeModal()">✕</button>
+</div>
+
+<div class="profile">
+<div class="avatar">${initials(p.name)}</div>
+<div>
+<b>${esc(p.guardian)}</b>
+<span>${esc(p.phone)}</span>
+<span>${esc(p.batch)}</span>
+</div>
+</div>
+
+<div class="details">
+
+<div>
+<small>Monthly fee</small>
+<b>${money(p.fee)}</b>
+</div>
+
+<div>
+<small>Paid</small>
+<b>${money(p.paid)}</b>
+</div>
+
+<div>
+<small>Balance</small>
+<b>${money(Math.max(0,p.fee-p.paid))}</b>
+</div>
+
+<div>
+<small>Status</small>
+${badge(p.status)}
+</div>
+
+</div>
+
+<div class="modalActions">
+
+<button class="wa"
+onclick="wa(players.find(x=>x.id==='${p.id}'))">
+◉ WhatsApp Reminder
+</button>
+
+<button class="primary"
+onclick="closeModal();pay('${p.id}')">
+₹ Mark Payment
+</button>
+
+<button class="del"
+onclick="deletePlayer('${p.id}')">
+🗑 Delete Player
+</button>
+
+</div>
+
+</div>
+</div>`;
+}
+
+function closeModal(){
+document.getElementById("modalRoot").innerHTML=""
+}
+
+function addModal(){
+
+document.getElementById("modalRoot").innerHTML=`
+
+<div class="modalbg" onclick="if(event.target===this)closeModal()">
+
+<div class="modal">
+
+<div class="mh">
+<div>
+<h2>New Admission</h2>
+<small>Register a new player</small>
+</div>
+
+<button class="x" onclick="closeModal()">✕</button>
+</div>
+
+<form class="form" onsubmit="add(event)">
+
+<label>
+Full Name
+<input name="name" required>
+</label>
+
+<label>
+Guardian / Parent Name
+<input name="guardian" required>
+</label>
+
+<div class="two">
+
+<label>
+Phone / WhatsApp
+<input name="phone" placeholder="+91..." required>
+</label>
+
+<label>
+Monthly Fee (₹)
+<input name="fee" type="number" value="1200" required>
+</label>
+
+</div>
+
+<div class="two">
+
+<label>
+Sport
+
+<select name="sport">
+<option>Football</option>
+<option>Cricket</option>
+<option>Tennis</option>
+<option>Swimming</option>
+<option>Badminton</option>
+</select>
+
+</label>
+
+<label>
+Batch
+
+<select name="batch">
+<option>Morning 6:00-8:00 AM</option>
+<option>Evening 5:00-7:00 PM</option>
+</select>
+
+</label>
+
+</div>
+
+<label>
+Joining Date
+<input name="joining" type="date"
+value="${new Date().toISOString().slice(0,10)}">
+</label>
+
+<button class="primary wide">
+Create Admission
+</button>
+
+</form>
+
+</div>
+</div>`;
+}
+
+function add(e){
+
+e.preventDefault();
+
+const f=new FormData(e.target);
+
+const p={
+id:"PLR-"+Date.now().toString().slice(-6),
+name:f.get("name"),
+guardian:f.get("guardian"),
+phone:f.get("phone"),
+sport:f.get("sport"),
+batch:f.get("batch"),
+fee:Number(f.get("fee")),
+paid:0,
+status:"Unpaid",
+joining:f.get("joining"),
+active:true
+};
+
+players.unshift(p);
+
+save();
+closeModal();
+render();
+
+toast("Player admitted successfully")
+}
+
+function roster(list,payment=false){
+
+return `
+<div style="overflow:auto">
+
+<table class="table">
+
+<thead>
+<tr>
+<th>Player</th>
+<th>Sport / Batch</th>
+<th>Fee</th>
+<th>Status</th>
+<th>${payment?"Payment":"Actions"}</th>
+</tr>
+</thead>
+
+<tbody>
+
+${list.map(p=>`
+
+<tr>
+
+<td>
+
+<button class="player" onclick="showPlayer('${p.id}')">
+
+<div class="avatar">
+${initials(p.name)}
+</div>
+
+<div>
+<b>${esc(p.name)}</b>
+<span>${p.id}</span>
+</div>
+
+</button>
+
+</td>
+
+<td class="td">
+<b>${esc(p.sport)}</b>
+<span>${esc(p.batch)}</span>
+</td>
+
+<td class="td">
+<b>${money(p.fee)}</b>
+<span>${money(p.paid)} paid</span>
+</td>
+
+<td>
+${badge(p.status)}
+</td>
+
+<td>
+
+<div class="actions">
+
+${p.status!=="Paid"
+?`
+<button class="wa"
+onclick="wa(players.find(x=>x.id==='${p.id}'))">
+◉ Remind
+</button>
+`
+:""}
+
+<button class="pay" onclick="pay('${p.id}')">
+₹ Pay
+</button>
+
+<button class="del" onclick="deletePlayer('${p.id}')">
+🗑 Delete
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+`).join("")}
+
+</tbody>
+
+</table>
+
+${list.length?"":'<div class="empty">No players found.</div>'}
+
+</div>`;
+}
+
+function dashboard(){
+
+const paid=players.filter(p=>p.status==="Paid").length;
+const partial=players.filter(p=>p.status==="Partial").length;
+const unpaid=players.filter(p=>p.status==="Unpaid").length;
+
+const collected=players.reduce((a,p)=>a+p.paid,0);
+
+const outstanding=players.reduce(
+(a,p)=>a+Math.max(0,p.fee-p.paid),
+0
+);
+
+return `
+
+<div class="title">
+
+<div>
+<h1>Good afternoon, Admin 👋</h1>
+<p>Academy fee overview for ${month}.</p>
+</div>
+
+</div>
+
+<div class="cards">
+
+<div class="card">
+<div class="icon">♙</div>
+<label>Registered Players</label>
+<strong>${players.length}</strong>
+<small>${players.filter(p=>p.active).length} active</small>
+</div>
+
+<div class="card">
+<div class="icon green">₹</div>
+<label>Collected This Month</label>
+<strong>${money(collected)}</strong>
+<small>${paid} fully paid</small>
+</div>
+
+<div class="card">
+<div class="icon amber">!</div>
+<label>Outstanding</label>
+<strong>${money(outstanding)}</strong>
+<small>${unpaid+partial} players pending</small>
+</div>
+
+<div class="card">
+<div class="icon">◉</div>
+<label>WhatsApp Reminders</label>
+<strong>—</strong>
+<small>Click-to-chat ready</small>
+</div>
+
+</div>
+
+<div class="quick">
+
+<b>Quick actions</b>
+
+<button onclick="bulk()">
+◉ Send All Pending Reminders
+</button>
+
+<button onclick="addModal()">
+＋ Add New Admission
+</button>
+
+<button onclick="toast('Report export can be added with a backend export service')">
+⇩ Export Monthly Report
+</button>
+
+</div>
+
+<div class="grid">
+
+<div class="panel">
+
+<div class="ph">
+<div>
+<h2>Fee Collection</h2>
+<span>Current month</span>
+</div>
+</div>
+
+<div class="chart">
+
+<div class="donut"></div>
+
+<div class="legend">
+
+<div>
+<i class="dot" style="background:#10b981"></i>
+<span>Paid</span>
+<b>${paid}</b>
+</div>
+
+<div>
+<i class="dot" style="background:#f59e0b"></i>
+<span>Partial</span>
+<b>${partial}</b>
+</div>
+
+<div>
+<i class="dot" style="background:#ef4444"></i>
+<span>Unpaid</span>
+<b>${unpaid}</b>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<div class="ph">
+
+<div>
+<h2>Admissions Growth</h2>
+<span>Last 6 months</span>
+</div>
+
+</div>
+
+<div class="bars">
+
+${[35,48,42,64,57,82].map((v,i)=>`
+
+<div class="barc">
+
+<div class="bar" style="height:${v}%"></div>
+
+<span>
+${["Apr","May","Jun","Jul","Aug","Sep"][i]}
+</span>
+
+</div>
+
+`).join("")}
+
+</div>
+
+</div>
+
+</div>
+`;
+}
+
+function playersPage(payment=false){
+
+const list=filtered();
+
+return `
+
+<div class="title">
+
+<div>
+
+<h1>${payment?"Payments":"Player Roster"}</h1>
+
+<p>
+${payment
+?"Track collections and outstanding balances."
+:"Manage admissions, profiles and monthly fee status."
+}
+</p>
+
+</div>
+
+${!payment
+?'<button class="primary" onclick="addModal()">＋ New Player</button>'
+:""}
+
+</div>
+
+<div class="panel">
+
+<div class="filters">
+
+<div class="search">
+⌕
+<input id="listSearch"
+placeholder="Search roster..."
+value="${esc(query)}">
+</div>
+
+<select id="sport">
+
+<option>All Sports</option>
+<option>Football</option>
+<option>Cricket</option>
+<option>Tennis</option>
+<option>Swimming</option>
+<option>Badminton</option>
+
+</select>
+
+<select id="status">
+
+<option>All Status</option>
+<option>Paid</option>
+<option>Partial</option>
+<option>Unpaid</option>
+
+</select>
+
+</div>
+
+${roster(list,payment)}
+
+</div>
+`;
+}
+
+function render(){
+
+const c=document.getElementById("content");
+
+if(tab==="Dashboard")
+c.innerHTML=dashboard();
+
+if(tab==="Players"||tab==="Payments")
+c.innerHTML=playersPage(tab==="Payments");
+
+if(tab==="Reminders")
+
+c.innerHTML=`
+
+<div class="title">
+
+<div>
+<h1>WhatsApp Reminders</h1>
+<p>Personalized fee reminders open directly in WhatsApp.</p>
+</div>
+
+<button class="primary" onclick="bulk()">
+◉ Send All Pending
+</button>
+
+</div>
+
+<div class="notice">
+
+<b>Click-to-chat is active.</b>
+<br>
+
+Each reminder includes the guardian name,
+player name, current month, total fee and pending amount.
+
+WhatsApp must be installed or available in the browser.
+
+</div>
+
+<div class="panel">
+${roster(players.filter(p=>p.status!=="Paid"))}
+</div>
+
+`;
+
+if(tab==="Settings")
+
+c.innerHTML=`
+
+<div class="title">
+
+<div>
+<h1>Settings</h1>
+<p>Academy configuration and monthly fee controls.</p>
+</div>
+
+</div>
+
+<div class="panel settings">
+
+<div>
+
+<b>Monthly Fee Reset</b>
+
+<p>
+Production rule: on the 5th at midnight,
+archive the previous month's payments and
+create/reset current-month fees for active players.
+
+This standalone version provides a manual reset for testing.
+</p>
+
+<button class="danger" onclick="reset()">
+↻ Manual Fee Reset
+</button>
+
+</div>
+
+<hr>
+
+<label>
+
+<b>Academy Name</b>
+
+<input value="Sports Academy" readonly>
+
+</label>
+
+<label>
+
+<b>Default Due Date</b>
+
+<select>
+
+<option>5th of every month</option>
+<option>10th of every month</option>
+
+</select>
+
+</label>
+
+</div>
+
+`;
+
+document.querySelectorAll(".nav")
+.forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));
+
+bindList();
+}
+
+function bindList(){
+
+const ls=document.getElementById("listSearch");
+const sp=document.getElementById("sport");
+const st=document.getElementById("status");
+
+if(ls)
+ls.oninput=e=>{
+query=e.target.value;
+render();
+};
+
+if(sp){
+sp.value=sportFilter;
+sp.onchange=e=>{
+sportFilter=e.target.value;
+render()
+}
+}
+
+if(st){
+st.value=statusFilter;
+st.onchange=e=>{
+statusFilter=e.target.value;
+render()
+}
+}
+
+}
+
+document.querySelectorAll(".nav")
+.forEach(b=>b.onclick=()=>{
+tab=b.dataset.tab;
+
+document.getElementById("side")
+.classList.remove("open");
+
+document.getElementById("overlay")
+.classList.add("hidden");
+
+render()
+});
+
+document.getElementById("newBtn").onclick=addModal;
+
+document.getElementById("hamb").onclick=()=>{
+document.getElementById("side")
+.classList.add("open");
+
+document.getElementById("overlay")
+.classList.remove("hidden")
+};
+
+document.getElementById("overlay").onclick=()=>{
+document.getElementById("side")
+.classList.remove("open");
+
+document.getElementById("overlay")
+.classList.add("hidden")
+};
+
+document.getElementById("globalSearch").oninput=e=>{
+query=e.target.value;
+
+if(tab==="Dashboard")return;
+
+render();
+};
+
+render();
+
+</script>
+</body>
+</html>
